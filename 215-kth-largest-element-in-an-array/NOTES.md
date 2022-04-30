@@ -1,1 +1,1 @@
-​
+just sort the array then return kth element from the last
