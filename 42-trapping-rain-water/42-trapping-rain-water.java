@@ -3,12 +3,10 @@ class Solution {
         int n = height.length;
         int x[] = new int[n];
         int y[] = new int[n];
-        int maxx = height[0];
-        int maxy = height[n-1];
+        int maxx = height[0], maxy = height[n-1];
         x[0] = maxx;
         y[n-1] = maxy;
-        int j = 0;
-        int min,sum=0;
+        int j = 0,min=0,sum=0;
         for(int i = 1 ; i < n ; i++){
             j = n-1-i;
             maxx = Math.max(maxx, height[i]);
