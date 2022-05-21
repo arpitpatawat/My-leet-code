@@ -19,8 +19,6 @@ class Solution {
         for(int i = 0 ; i < n ; i++){
             min = Math.min(x[i], y[i]);
             sum += min - height[i];
-           // System.out.println(y[i]);
-             System.out.println(x[i] + "," + y[i] + "," );
         }
         return sum;
     }
