@@ -4,8 +4,7 @@ class Solution {
         int sum = 0;
         for(int i =1 ; i < prices.length ; i++ ){
             if(prices[i] > min){
-            sum = sum>prices[i] - min ? sum: prices[i]-min;
-                //sum = Math.max(sum , prices[i] - min);
+           sum = Math.max(sum , prices[i] - min);
             }
             else min = prices[i];
         }
