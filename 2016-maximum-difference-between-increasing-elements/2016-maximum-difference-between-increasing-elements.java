@@ -13,7 +13,7 @@ class Solution {
     public int maximumDifference(int[] a) {
         int res = a[0], diff = -1;
         for(int i =1 ; i < a.length ; ++i){
-            System.out.println(diff);
+        
                 diff = Math.max(diff, a[i] - res);
                 res = Math.min(res,a[i]);
         }
