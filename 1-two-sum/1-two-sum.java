@@ -8,9 +8,7 @@ class Solution {
                 nums[1] = map.get(target- a[i]);
                 return nums;
             }
-            else {
                 map.put(a[i],i);
-            }
         }
         return nums;
     }
