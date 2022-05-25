@@ -4,8 +4,8 @@ class Solution {
         while(low < high){
            int temparea = Math.min(a[low],a[high]) * (high-low);
             area= Math.max(temparea,area);
-            if(a[low] > a[high]){high--;}
-            else low++;
+            if(a[low] > a[high]){--high;}
+            else ++low;
         }
         return area;
     }
