@@ -1,16 +1,13 @@
 class Solution {
-    public int subarraysDivByK(int[] a, int k) {
-        int count = 0;
-        int sum = 0 , rem = 0;
-        int arr[] = new int[k+1];
-        arr[0] = 1;
-        for(int i = 0 ; i < a.length ; ++i){
-            sum += a[i];
-            rem = sum % k;
-            if(rem < 0) rem += k;
-            count += arr[rem];
-            System.out.println(rem +"," + count);
-            arr[rem] = arr[rem] + 1;
+    public int subarraysDivByK(int[] A, int K) {
+        int[] map = new int[K];
+		map[0] = 1;
+        int count = 0, sum = 0;
+        for(int a : A) {
+            sum = (sum + a) % K;
+            if(sum < 0) sum += K;  // Because -1 % 5 = -1, but we need the positive mod 4
+            count += map[sum];
+            map[sum]++;
         }
         return count;
     }
