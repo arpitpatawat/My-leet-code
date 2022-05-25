@@ -9,7 +9,7 @@ class Solution {
         if(rem < 0) rem +=k;
         if(map.containsKey(rem)){
             if(i+1-map.get(rem) > 1) return true;
-            map.put(k+1,i+1);
+            //map.put(k+1,i+1);
             continue;
         }
         map.put(rem,1+i);
