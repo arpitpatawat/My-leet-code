@@ -10,7 +10,7 @@ class Solution {
             if(rem < 0) rem += k;
             count += arr[rem];
             System.out.println(rem +"," + count);
-            arr[rem]++;
+            arr[rem] = arr[rem] + 1;
         }
         return count;
     }
