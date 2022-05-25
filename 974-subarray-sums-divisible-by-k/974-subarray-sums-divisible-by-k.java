@@ -2,7 +2,7 @@ class Solution {
     public int subarraysDivByK(int[] a, int k) {
         int count = 0;
         int sum = 0 , rem = 0;
-        int arr[] = new int[k+1];
+        int arr[] = new int[k];
         arr[0] = 1;
         for(int i = 0 ; i < a.length ; ++i){
             sum += a[i];
