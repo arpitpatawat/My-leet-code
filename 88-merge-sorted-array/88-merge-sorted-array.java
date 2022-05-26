@@ -7,12 +7,12 @@ class Solution {
          
          if(k < 0 || j < 0) break;
          if(a[k] > b[j]){
-             a[i] = a[k];
-             --k;
+             a[i] = a[k--];
+            // --k;
          } 
          else {
-             a[i] = b[j];
-             --j;
+             a[i] = b[j--];
+           //  --j;
          }
      }
          while (j >= 0) { //only need to combine with remaining nums2, if any
