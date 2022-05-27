@@ -5,6 +5,6 @@ class Solution {
             char num = a.charAt(i);
             if(a.indexOf(num) != i) ++count;
         }
-        return (a.length() - count ==26)? true:false;
+        return (a.length() - count ==26);
     }
 }
