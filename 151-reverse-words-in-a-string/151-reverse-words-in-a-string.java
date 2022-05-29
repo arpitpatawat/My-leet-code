@@ -9,7 +9,6 @@ class Solution {
                 --high;
             }
         return new String(s);
-        // System.out.println(a);
     }
     public String reverseWords(String s) {
         s = s.trim().replaceAll(" +"," "); // this will replace all the multiple white space in between and initial and after spaces of the string
