@@ -20,32 +20,10 @@ class Solution {
                 ++count;
             }
         }
-        System.out.println(count +" " + res);
         return (count==pattern.length() && res ==s.length())?true:false;
         }
 }
 
-//        for(int i =0 ; i < s.length() ; ++i)
-//        {
-//           char temp = s.charAt(i);
-//            if(temp == ' ')
-//            {
-//                String alpha = s.substring(res,i);
-//                res = i+1;
-//                // System.out.println(!map.get(pattern.charAt(count)).equals(alpha));
-//                // System.out.println(map.get(pattern.charAt(count)));
-                
-//                if(map.containsKey(pattern.charAt(count))  && !map.get(pattern.charAt(count)).equals(alpha) ) 
-//                {
-//                    return false;
-//                }
-               
-               
-//                map.put(pattern.charAt(count),alpha);
-//                ++count;
-//            }
-//        }
-     
             
 
                 
