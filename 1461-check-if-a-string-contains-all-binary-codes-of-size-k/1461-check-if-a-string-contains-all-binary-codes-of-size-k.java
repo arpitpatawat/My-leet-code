@@ -8,7 +8,7 @@ class Solution {
                map.put(value,i);
             }
         }
-        System.out.println(map);
+        // System.out.println(map);
         return (map.size() == Math.pow(2,k));
     }
 }
