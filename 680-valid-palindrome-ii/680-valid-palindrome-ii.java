@@ -1,5 +1,5 @@
 class Solution {
-    public boolean check(String s, int low, int high){
+    private boolean check(String s, int low, int high){
         while(low<high){
             if(s.charAt(low) != s.charAt(high)){
                 return false;
