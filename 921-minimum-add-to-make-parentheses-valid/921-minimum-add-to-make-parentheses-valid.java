@@ -4,8 +4,9 @@ class Solution {
         for(int i = 0 ; i < s.length() ; ++i){
             if(s.charAt(i) ==')' && !stk.isEmpty() && stk.peek() =='('){
                 stk.pop();
-                continue;
+                // continue;
             }
+            else 
             stk.push(s.charAt(i));
            
         }
