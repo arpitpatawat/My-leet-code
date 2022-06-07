@@ -15,7 +15,7 @@ class Solution {
            //  --j;
          }
      }
-         while (j >= 0) { //only need to combine with remaining nums2, if any
+         while (j >= 0) { 
         a[i--] = b[j--]; }
         
     }
