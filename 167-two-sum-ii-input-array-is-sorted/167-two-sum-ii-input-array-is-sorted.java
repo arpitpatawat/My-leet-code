@@ -3,10 +3,10 @@ class Solution {
         int output[] = new int[2];
         int low = 0;
         int high = numbers.length - 1;
-        while(low < high){
-            
-            if(numbers[low] + numbers[high] == target){output[0] = low+1; output[1] = high + 1;
-                                                      return output;}
+        while(low < high){  
+            if(numbers[low] + numbers[high] == target){
+                    return new int[] {low+1, high+1};
+            }
             else if(numbers[low] + numbers[high] > target){
                 --high;
             }
