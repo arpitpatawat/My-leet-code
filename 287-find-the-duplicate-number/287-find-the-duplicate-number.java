@@ -11,7 +11,7 @@ class Solution {
         );
         
         // now they collide
-        fast = nums[0];
+        slow = nums[0];
         while(slow != fast){
             slow = nums[slow];
             fast = nums[fast];
