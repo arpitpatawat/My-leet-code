@@ -25,14 +25,14 @@ class Solution {
         while(head1 != null && head2 != null){
             if(head1.val < head2.val){
                 tail.next = head1;
-                tail = tail.next;
+               // tail = tail.next;
                 head1 = head1.next;
             }
             else{
                 tail.next = head2;
-                tail = tail.next;
                 head2 = head2.next;
             }
+                tail = tail.next;
         }
         
         // Case 4 : when one of the list is finished 
