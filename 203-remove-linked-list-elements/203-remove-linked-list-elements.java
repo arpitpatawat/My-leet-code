@@ -20,7 +20,7 @@ class Solution {
             }
             curr = curr.next;
         }
-        prev.next = curr;
+        prev.next = null;
         return (head.val == val) ? head.next : head ;
     }
 }
