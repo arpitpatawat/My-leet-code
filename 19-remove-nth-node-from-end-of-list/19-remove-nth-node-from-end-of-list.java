@@ -22,10 +22,10 @@ class Solution {
             curr = curr.next;
             fast = fast.next;
         }
-        if(fast != null && fast.next == null){
-            curr.next = curr.next.next;
-        }
-        else if(fast == null) return curr.next;
+        if(fast == null) return curr.next;
+        // if(fast != null && fast.next == null){
+          else  curr.next = curr.next.next;
+        // }
         return head;
     }
 }
