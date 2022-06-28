@@ -13,19 +13,18 @@ class Solution {
      if(head.next == null) return null; 
         ListNode curr = head;
         ListNode fast = head;
-        for(int i = 0 ; i < n && fast != null; ++i){
+        while( n > 0){
             fast = fast.next;
+            --n;
         }
         // if fast.next == null then i have to remove curr.next 
         // if fast == null then i have to remove head;
-        while(fast != null && fast.next != null){
+        if(fast == null) return curr.next;
+        while(fast.next != null){
             curr = curr.next;
             fast = fast.next;
         }
-        if(fast == null) return curr.next;
-        // if(fast != null && fast.next == null){
-          else  curr.next = curr.next.next;
-        // }
+         curr.next = curr.next.next;
         return head;
     }
 }
