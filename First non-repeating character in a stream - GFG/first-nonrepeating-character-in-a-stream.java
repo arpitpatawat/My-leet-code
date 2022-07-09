@@ -31,7 +31,7 @@ class Solution
         
         for(int i = 0 ; i < A.length() ; ++i){
             char temp = A.charAt(i);
-            arr[A.charAt(i) - 'a']++;
+            ++arr[A.charAt(i) - 'a'];
             q.offer(temp);
             while(!q.isEmpty() && arr[q.peek() -'a'] > 1){
                 q.poll();
