@@ -16,7 +16,7 @@
 class Solution {
     public int maxval(TreeNode root, int[] count){
         if(root == null) return 0;
-        if(root.left == null && root.right ==null) return 1;
+        // if(root.left == null && root.right ==null) return 1;
         int x = maxval(root.left, count);
         int y = maxval(root.right, count);
         count[0] = Math.max(count[0] , x+y);
