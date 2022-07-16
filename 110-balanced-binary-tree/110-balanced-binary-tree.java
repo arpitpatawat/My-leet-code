@@ -17,11 +17,11 @@ class Solution {
     public int balance(TreeNode root){
         if(root == null ) return 0;
         // if(root.left == null && root.right == null) reutrn 1;
-        if(balance(root.left) == -1 || (balance(root.right) == -1)){
-            return -1;
-        }
         int x = balance(root.left);
         int y = balance(root.right);
+        if(x == -1 || y == -1){
+            return -1;
+        }
     
         if(Math.abs(x - y) < 2)
             return Math.max(x , y) + 1;
