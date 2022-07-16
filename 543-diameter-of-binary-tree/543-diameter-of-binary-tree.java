@@ -14,19 +14,19 @@
  * }
  */
 class Solution {
-    int count = 0;
-    public int maxval(TreeNode root){
+    public int maxval(TreeNode root, int[] count){
         if(root == null) return 0;
         if(root.left == null && root.right ==null) return 1;
-        int x = maxval(root.left);
-        int y = maxval(root.right);
-        count = Math.max(count , x+y);
+        int x = maxval(root.left, count);
+        int y = maxval(root.right, count);
+        count[0] = Math.max(count[0] , x+y);
         return Math.max(x,y)+1;
         
     }
     public int diameterOfBinaryTree(TreeNode root) {
-        maxval(root);
-        return count ;
+        int count[] = new int[1];
+        maxval(root, count);
+        return count[0] ;
         
     }
 }
