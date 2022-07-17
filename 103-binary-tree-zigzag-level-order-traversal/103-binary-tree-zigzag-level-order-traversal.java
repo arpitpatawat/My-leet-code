@@ -13,46 +13,31 @@
  *     }
  * }
  */
+
+/*
+if level is even , add element to list in left to right order
+if level is odd , add element to list in right to left order
+*/
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-     List<List<Integer>> ans  = new ArrayList<>();
-     if(root == null) return ans;
-     Deque<TreeNode> dq = new  ArrayDeque<>();
-     dq.offerFirst(root);
-     boolean flag = true; // jab true toh pollfirst , jab false to polllast
-     while(dq.size() > 0){
-         int count = dq.size();
-         List<Integer> temp = new ArrayList<>();
-         for(int i = 0 ; i < count ; ++i){
-             
-                 if(flag){
-                     TreeNode alpha = dq.pollFirst();
-                     temp.add(alpha.val);
-                     if(alpha.left != null) {
-                         dq.offerLast(alpha.left);
-                     }
-                     if(alpha.right != null) {
-                         dq.offerLast(alpha.right);
-                     }
-                     
-                     }
-                 else {
-                     TreeNode alpha = dq.pollLast();
-                     temp.add(alpha.val);
-                     if(alpha.right != null) {
-                         dq.offerFirst(alpha.right);
-                     }
-                    if(alpha.left != null) {
-                         dq.offerFirst(alpha.left);
-                     }
-                    
-                    }
-             
-             
-         }
-         flag = !flag;
-         ans.add(temp);
-     }
-     return ans;
+        //DFS se bhi kr skte hai 
+        List<List<Integer>> ans = new ArrayList<List<Integer>>();
+        DFS(root , ans, 0);        
+        return ans;
+    }
+    public void DFS(TreeNode root , List<List<Integer>> ans, int level){
+        // List<Integer> ans = new ArrayList<>();
+        if(root == null) return;
+        if(level == ans.size()){
+            ans.add(new ArrayList<Integer>());
+        }
+        if(level % 2 == 0) { // even
+            ans.get(level).add(root.val);
+        }
+        else{
+            ans.get(level).add(0,root.val);
+        }
+        DFS(root.left, ans, level+1);
+        DFS(root.right, ans ,level+ 1);   
     }
 }
