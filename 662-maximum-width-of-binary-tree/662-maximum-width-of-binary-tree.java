@@ -38,10 +38,7 @@ class Solution {
              Pair temp = q.poll();
              int num = temp.x - min;
              TreeNode nd = temp.y;
-            
-             if(i == count - 1){
-                 high = num;
-             }
+             high = num;
             
             if(nd.left != null) {
                 q.offer(new Pair(2*num + 1, nd.left));
