@@ -23,20 +23,24 @@ class Solution {
         }
         return(compareNode(root.left , subRoot.left) && compareNode(root.right, subRoot.right));
     }
-    public void findNode(TreeNode root , TreeNode subRoot , int ans[]){
-        if(root == null) return ;
+    public boolean findNode(TreeNode root , TreeNode subRoot , int ans[]){
+        if(root == null) return false;
         if(root.val == subRoot.val){
          if(compareNode(root , subRoot)){
                 ans[0] = 1;
+             return true;
             }
         }
-        findNode(root.left , subRoot , ans);
-        findNode(root.right , subRoot , ans);
+        
+        return (findNode(root.left , subRoot , ans) || findNode(root.right , subRoot , ans));
         
     }
     public boolean isSubtree(TreeNode root, TreeNode subRoot) {
         int ans[] = new int[1];
-        findNode(root , subRoot , ans );
+        if(findNode(root , subRoot , ans )){
+            
         return (ans[0] == 1) ? true : false;
+        }
+        return false;
     }
 }
