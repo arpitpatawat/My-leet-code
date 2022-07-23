@@ -16,9 +16,10 @@
 class Solution {
     public void flatten(TreeNode root) {
         TreeNode curr = root;
+        TreeNode prev = null;
         while(curr != null){
             if(curr.left != null){
-                TreeNode prev = curr.left;
+                 prev = curr.left;
                 while(prev.right != null){
                     prev = prev.right;
                 }
