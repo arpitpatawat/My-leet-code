@@ -15,8 +15,9 @@
  */
 class BSTIterator {
     
-    private Stack<TreeNode> stk = new Stack<>();
+    private Stack<TreeNode> stk;
     public BSTIterator(TreeNode root) {
+        stk = new Stack<TreeNode>();
         pushAll(root);
     }
     
