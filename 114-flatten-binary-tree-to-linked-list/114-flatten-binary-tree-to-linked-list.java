@@ -12,23 +12,25 @@
  *         this.right = right;
  *     }
  * }
- */// use morris traversal 
+ */
 class Solution {
     public void flatten(TreeNode root) {
         TreeNode curr = root;
-        TreeNode prev = null;
         while(curr != null){
             if(curr.left != null){
-                 prev = curr.left;
+                TreeNode prev = curr.left;
                 while(prev.right != null){
                     prev = prev.right;
                 }
-                prev.right = curr.right;
+                if(prev.right == null){
+                    prev.right = curr.right;
+                }
+                prev = curr.right;
                 curr.right = curr.left;
                 curr.left = null;
+                
             }
-            
-                curr = curr.right;
+            curr = curr.right;
         }
     }
 }
