@@ -1,0 +1,1 @@
+at any point , if top and bottom or left and right clashes with each other , then break the loop
