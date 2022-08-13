@@ -1,12 +1,23 @@
 class Solution {
-    public int maxArea(int[] a) {
-      int low = 0, high = a.length-1, area = 0; 
+    public int maxArea(int[] height) {
+        int low = 0;
+        int high = height.length - 1;
+        int store = 0;
+        int count = 0;
+        
         while(low < high){
-           int temparea = Math.min(a[low],a[high]) * (high-low);
-            area= Math.max(temparea,area);
-            if(a[low] > a[high]){--high;}
-            else ++low;
+            count = Math.min(height[low] , height[high]) * (high - low);
+            store = Math.max(store , count);
+            
+            if(height[low] > height[high]){
+                high--;    
+            }
+            else{
+                low++;
+            }
         }
-        return area;
+        
+        
+        return store;
     }
 }
