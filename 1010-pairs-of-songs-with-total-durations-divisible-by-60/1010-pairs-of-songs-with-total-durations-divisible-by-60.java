@@ -5,9 +5,9 @@ class Solution {
         int sum = 0;
         for(int i = 0 ; i < time.length ; ++i){
             int k = time[i] % 60;
-            
-            if(map.containsKey((60 - k) % 60)){
-                sum += map.get((60 - k) % 60);
+            int p = (60 - k) % 60;
+            if(map.containsKey(p)){
+                sum += map.get(p);
             }
             
             map.put(k , map.getOrDefault(k , 0) + 1);
