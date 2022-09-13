@@ -1,31 +1,40 @@
 class Solution {
-    public static int LCS(String s1 , String s2 , int m , int n, int helper[][]){
-        if(m == -1 || n == -1){
-            return 0;
+    public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        
+        int helper[][] = new int[m + 1][n + 1];
+        
+        // filling the first column 
+        for(int i = 0 ; i < m + 1 ; ++i){
+            helper[i][0] = 0;
         }
         
-        if(helper[m][n] == -1){
-            if(s1.charAt(m) == s2.charAt(n)){
-                helper[m][n] = 1 +  LCS(s1 , s2 , m-1 , n-1 , helper);
-            }
-            else{
-                helper[m][n] = Math.max(LCS(s1 , s2 , m-1 , n , helper) , LCS (s1 , s2 , m , n- 1 , helper));
-            }
-            
+        // filling the first row 
+        for(int i = 0 ; i < n + 1 ; ++i){
+            helper[0][i] = 0;
         }
+        
+        
+        for(int i = 1; i < m + 1 ; ++i){
+            for(int j = 1; j < n + 1 ; ++j){
+                if(text1.charAt(i - 1) == text2.charAt(j - 1)){
+                    helper[i][j] = 1 + helper[i-1][j-1];
+                }
+                else{
+                    helper[i][j] = Math.max(helper[i-1][j] ,helper[i][j-1]);
+                }
+            }
+        }
+        
+        // for(int i = 0 ; i < m + 1 ; ++i){
+        //     for(int j = 0 ; j < n + 1 ; ++j){
+        //         System.out.print(helper[i][j] +" ");
+        //     }
+        //     System.out.println("\n");
+        // }
+        
         return helper[m][n];
         
-    }
-    public int longestCommonSubsequence(String text1, String text2) {
-        int m = text1.length();   // m = 5
-        int n = text2.length();   // n = 3
-        int helper[][] = new int[m][n];  // 5 X 3
-        for(int i = 0 ; i  < m ; ++i){  
-            for(int j = 0 ; j < n ; ++j){
-                helper[i][j] = -1;
-            }
-        }
-        
-        return LCS(text1 , text2 , m-1 , n-1 , helper); // 4 , 2
     }
 }
