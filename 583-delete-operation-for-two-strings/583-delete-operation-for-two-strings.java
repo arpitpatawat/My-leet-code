@@ -1,15 +1,27 @@
-// Need to solve again **
 class Solution {
     public int minDistance(String word1, String word2) {
-    int dp[][] = new int[word1.length()+1][word2.length()+1];
-    for(int i = 0; i <= word1.length(); i++) {
-        for(int j = 0; j <= word2.length(); j++) {
-            if(i == 0 || j == 0) dp[i][j] = 0;
-            else dp[i][j] = (word1.charAt(i-1) == word2.charAt(j-1)) ? dp[i-1][j-1] + 1
-                    : Math.max(dp[i-1][j], dp[i][j-1]);
-        }
+      return word1.length() + word2.length() - 2 * LCS(word1 , word2);  
     }
-    int val =  dp[word1.length()][word2.length()];
-    return word1.length() - val + word2.length() - val;
-}
+    
+    public int LCS(String s1 , String s2){
+        int m = s1.length();
+        int n = s2.length();
+        
+        int helper[][] = new int[m+1][n+1];
+        
+        for(int i = 1 ; i < m+1 ; ++i){
+            for(int j = 1 ; j < n+1 ; ++j){
+                if(s1.charAt(i - 1) == s2.charAt(j - 1)){
+                    helper[i][j] = 1 + helper[i-1][j-1];
+                }
+                else{
+                    helper[i][j] = Math.max(helper[i-1][j] , helper[i][j-1]);
+                }
+            }
+        }
+        
+        return helper[m][n];
+        
+        
+    }
 }
