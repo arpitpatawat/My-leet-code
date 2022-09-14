@@ -1,37 +1,40 @@
 class Solution {
-   // helper = [ -1 , -1, -1 ,-1 ,-1 ,-1 ,-1  ....... 10 terms ] 
-    public int DP(int[] coins , int amount , int helper[]){
-     
-           
-        if(amount < 0) return -1;
-        if(amount == 0) return 0;
-        
-        if(helper[amount] == -2){  // i have not visited it before
-     
-        int sum = 0;
-        int f = Integer.MAX_VALUE;
-        for(int i = 0 ; i < coins.length ; ++i){
-            
-            sum = DP( coins, amount - coins[i], helper);
-            
-            if( sum != -1){
-                f = Math.min(sum , f);
-            }
-        }
-         helper[amount] = (f == Integer.MAX_VALUE) ? -1 : 1+f;
-        }
-        
-        return helper[amount];
-        
-    }
-    
     public int coinChange(int[] coins, int amount) {
-        int helper [] = new int[amount + 1];
-        for(int i = 0 ; i < helper.length ; ++i){
-            helper[i] = -2;
+        
+        int dp[] = new int[amount+1];
+        
+        // from 1 to 11 fill -1;
+        for(int i = 1; i < amount+1; ++i){
+            dp[i] = -1;
         }
         
-        return DP(coins , amount , helper);
+        
+        for(int i = 1 ; i < amount + 1 ; ++i){
+                int sum = Integer.MAX_VALUE;
+                int res = 0;
+            for(int j = 0  ; j < coins.length; ++j){
+              if(  coins[j] <= i ){
+                if(dp[i - coins[j]] == -1){
+                     res = -1;
+                }
+                else{
+                    res = 1 + dp[i - coins[j]];
+                    sum = Math.min(sum , res);
+                }
+              }
+            
+            }
+            if(sum == Integer.MAX_VALUE){
+                dp[i] = -1;
+            }
+            else{
+                dp[i] = sum;
+            }
+            
+            
+        }
+        
+        return dp[amount];
         
     }
 }
