@@ -1,27 +1,33 @@
 class Solution {
-    
-    public int DP(int amount , int[] coins, int n, int helper[][]){
-        
-        if(n < 0) return 0;
-        if(amount == 0) return 1;
-        
-        if(helper[n][amount] == -1){
-        int sum = 0;
-        sum += DP( amount ,  coins , n - 1, helper);
-        if(coins[n] <= amount){
-            sum += DP(amount - coins[n], coins , n, helper);
-        }
-         helper[n][amount] = sum;   
-        }
-        return helper[n][amount];
-    }
     public int change(int amount, int[] coins) {
-        int helper[][] = new int[coins.length][amount+1];
-        for(int i = 0 ; i < helper.length; ++i){
-            for(int j = 0 ; j < helper[0].length; ++j){
-                helper[i][j] = -1;
+        
+        int n = coins.length;
+        int helper[][] = new int [n+1][amount+1];
+        
+        for(int i = 1 ; i < helper.length ; ++i){
+            helper[i][0] = 1;
+        }
+        
+        /*
+        0 1 2 3 4 5  amount
+      n 0
+       1
+       2
+       3
+       */
+        
+        for(int i = 1 ; i < n+1; ++i){
+            
+            for(int j = 1; j < amount+1; ++j){
+                
+                helper[i][j] = helper[i-1][j];
+                
+                if(coins[i-1] <= j){
+                    helper[i][j] += helper[i][j - coins[i-1]];
+                }
             }
         }
-        return DP(amount , coins , coins.length - 1, helper);
+        
+        return helper[n][amount];
     }
 }
