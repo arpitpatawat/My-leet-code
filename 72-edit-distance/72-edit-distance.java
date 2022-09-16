@@ -1,32 +1,38 @@
 class Solution {
-    public int helper(String s1, String s2 , int m, int n, int DP[][]){
-        // base case 
-        if(m == 0) return n;
-        if(n == 0) return m;
-        
-        if(DP[m-1][n-1] == -1){
-            
-        if(s1.charAt(m-1) == s2.charAt(n-1)){
-            DP[m-1][n-1] =  helper(s1, s2 , m-1 , n-1,DP);
-        }
-        else{
-            DP[m-1][n-1]  = 1 + Math.min(
-           Math.min( helper(s1, s2, m, n-1, DP),
-            helper(s1, s2, m-1, n, DP)),
-            helper(s1, s2, m-1 ,n -1, DP)
-            );
-        }
-        }
-        return DP[m-1][n-1];
-    }
     public int minDistance(String word1, String word2) {
-        int DP[][] = new int[word1.length()][word2.length()]; 
-        // fill it with -1;
-        for(int i = 0 ; i < DP.length; ++i){
-            for (int j = 0 ; j < DP[0].length; ++j){
-                DP[i][j] = -1;
+     int m = word1.length();
+     int n = word2.length();
+     int dp [][] = new int[m+1][n+1];
+        for(int i = 0 ; i < m+1; ++i){
+            dp[i][0] = i;
+        } 
+        
+        for(int i = 0 ; i < n+1; ++i){
+            dp[0][i] = i;
+        }
+        
+        // pre processing done 
+        
+        for(int i = 1 ; i < m+1; ++i){
+            for(int j = 1 ; j < n+1; ++j){
+                if(word1.charAt(i-1) == word2.charAt(j-1)){
+                    dp[i][j] = dp[i-1][j-1];
+                }
+                else{
+                    dp[i][j] = 1+ Math.min(
+                    Math.min(dp[i-1][j], dp[i][j-1]),
+                    dp[i-1][j-1]
+                    );
+                }
             }
         }
-        return helper(word1 , word2 ,word1.length(), word2.length(), DP);
+        // for(int i = 0 ; i < m+1; ++i){
+        //     for(int j = 0 ; j < n+1; ++j){
+        // System.out.print(dp[i][j] +",");
+        //     }
+        //     System.out.println("\n");
+        // }
+        return dp[m][n];
+        
     }
 }
