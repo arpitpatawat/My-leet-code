@@ -2,7 +2,7 @@ class Solution {
     public int matchPlayersAndTrainers(int[] players, int[] trainers) {
         Arrays.sort(trainers);
         Arrays.sort(players);
-        // HashSet<Integer> set = new HashSet<>();
+        
         int ans = 0;
         int k = 0;
         for(int i = 0 ; i < players.length; ++i){
@@ -12,7 +12,7 @@ class Solution {
                 
                 if(trainers[k] >= players[i]){
                     ans ++;
-                    trainers[k] =-1;
+                    // trainers[k] =-1;
                     k = k+1;
                     break;
                 }
