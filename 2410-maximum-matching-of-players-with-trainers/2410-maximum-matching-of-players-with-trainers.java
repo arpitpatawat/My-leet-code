@@ -6,14 +6,17 @@ class Solution {
         int ans = 0;
         int k = 0;
         for(int i = 0 ; i < players.length; ++i){
-            for(int j = k ; j < trainers.length; ++j){
+            while(k < trainers.length){
                 
-                if(trainers[j] >= players[i]){
+            
+                
+                if(trainers[k] >= players[i]){
                     ans ++;
-                    trainers[j] =-1;
-                    k = j+1;
+                    trainers[k] =-1;
+                    k = k+1;
                     break;
                 }
+                k++;
             }
         }
         return ans;
