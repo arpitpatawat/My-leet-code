@@ -1,24 +1,24 @@
 class Solution {
-public int lcs(int[] nums1, int[] nums2 , int m , int n, Integer dp[][]){
-if(m < 0 || n < 0){
-return 0;
+private int lcs(int n1[], int n2[], int i, int j, int ans[], int dp[][]){
+if (i >= n1.length || j >= n2.length) return 0;
+if(dp[i][j]!=-1) return dp[i][j];
+int cur = 0;
+if (n1[i] == n2[j]) {
+cur = lcs(n1, n2, i + 1, j + 1, ans, dp)+1;
 }
-if(dp[m][n] == null){
-int ans = 0;
-if(nums1[m] == nums2[n]){
-ans = 1 + lcs(nums1 , nums2, m-1, n-1, dp);
-}
-else{
-ans=  Math.max(lcs(nums1, nums2 , m-1 , n, dp) , lcs(nums1, nums2 , m, n-1, dp));
-}
-dp[m][n] = ans;
-}
-return dp[m][n];
+lcs(n1, n2, i, j + 1, ans, dp);
+lcs(n1, n2, i + 1, j, ans, dp);
+ans[0] = Math.max(ans[0], cur);
+return dp[i][j] = cur;
 }
 public int findLength(int[] nums1, int[] nums2) {
-int m = nums1.length - 1;
-int n = nums2.length - 1;
-Integer dp[][] = new Integer[m+1][n+1];
-return lcs(nums1 , nums2 , m, n, dp);
+int n = nums1.length, m = nums2.length;
+int dp[][]= new int[n+1][m+1];
+for (int[] row : dp){
+Arrays.fill(row, -1);
+}
+int ans[] = new int[1];
+lcs(nums1, nums2, 0, 0, ans, dp);
+return ans[0];
 }
 }
