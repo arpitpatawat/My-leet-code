@@ -1,16 +1,35 @@
 class Solution {
-    public int findLength(int[] nums1, int[] nums2) {
-       int dp[][] = new int[nums1.length + 1][nums2.length+ 1];
+    public int lcs(int[] nums1, int[] nums2 , int m , int n, Integer dp[][], int glo[]){
+        
+        if(m < 0 || n < 0){
+            return 0;
+        }
+        if(dp[m][n] != null){
+            return dp[m][n];
+        }
         int ans = 0;
-        for(int i = 1 ; i < nums1.length + 1 ; ++i){
-            for(int j = 1 ; j < nums2.length + 1 ; ++j){
-                if(nums1[i-1] == nums2[j-1] ){
-                    dp[i][j] = 1 + dp[i-1][j-1];
-                    ans = Math.max(ans , dp[i][j]);
-                }
-            }
+        if(nums1[m] == nums2[n]){
+            ans = 1 + lcs(nums1 , nums2, m-1, n-1, dp,glo);
         }
         
-        return ans;
+            lcs(nums1, nums2 , m-1 , n, dp,glo);
+            lcs(nums1, nums2 , m, n-1, dp,glo);
+        
+        glo[0] = Math.max(glo[0] , ans);
+        dp[m][n] = ans;
+        return dp[m][n];
+        
+    }
+    
+    public int findLength(int[] nums1, int[] nums2) {
+        int m = nums1.length - 1;
+        int n = nums2.length - 1;
+        int glo[] = new int[1];
+        Integer dp[][] = new Integer[m+1][n+1];
+        int x =  lcs(nums1 , nums2 , m, n, dp, glo);
+        // for(int i = 0 ; i < nums1.length ; ++i){
+        //     System.out.println(Arrays.toString(dp[i]));
+        // }
+        return glo[0];
     }
 }
