@@ -9,7 +9,22 @@
  * }
  */
 class Solution {
-    public ListNode reverse(ListNode head){
+    private ListNode middle(ListNode head){
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        
+        return slow;
+    }
+    
+    private ListNode reverse(ListNode head){
+        if(head == null || head.next == null){
+            return head;
+        }
+        
         ListNode prev = null;
         ListNode curr = head;
         while(curr != null){
@@ -20,33 +35,20 @@ class Solution {
         }
         return prev;
     }
-    public boolean isPalindrome(ListNode head) {
-        ListNode slow = head;
-        ListNode fast = head;
+    public boolean isPalindrome(ListNode head1) {
+        // ListNode a = middle(head1);
+        // ListNode b = reverse(a);
         
-        // using floyd's algo to get the middle element
-        while(fast != null && fast.next != null){
-            slow = slow.next;
-            fast = fast.next.next;
+        
+        ListNode head2 = reverse(middle(head1));
+        while(head1 != null && head2 != null){
+            if(head1.val != head2.val){
+                return false;
+            }
+            head1 = head1.next;
+            head2 = head2.next;
         }
         
-        // for even list, fast -> null , slow -> start of second half
-        // for odd list , fast -> last node or != null and slow -> middle of the list, need to push one              node ahead
-        if(fast != null) slow = slow.next;
-        
-        // System.out.println(fast +"," + slow);
-        
-        // now i ensure that slow in both cases is at correct position.
-        slow = reverse(slow);
-        // slow will be at the end of list, so fast must be at start for palindrome check.
-        fast = head;
-        while(fast != null && slow != null){
-            if(fast.val != slow.val) return false;
-            fast = fast.next;
-            slow = slow.next;
-        }
         return true;
-        
-        
     }
 }
