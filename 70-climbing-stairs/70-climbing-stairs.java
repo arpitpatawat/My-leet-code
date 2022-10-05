@@ -1,20 +1,20 @@
 class Solution {
-    
-    public int helper(int n, Integer dp[]){
+    public int climbStairs(int n) {
         if(n == 0 || n == 1){
             return 1;
         }
+        int way1 = 1;
+        int way2 = 2;
         
-        if(dp[n] != null){
-            return dp[n];
+        
+        
+        for(int i = 3; i <= n; ++i){
+            int ans = way1 + way2;
+            way1 = way2;
+            way2 = ans;
         }
-        int way1 = helper(n-1,dp);
-        int way2 = helper(n-2,dp);
-        dp[n] =  way1 + way2;
-        return dp[n];
-    }
-    public int climbStairs(int n) {
-        Integer dp[] = new Integer[n+1];
-        return helper(n,dp);
+        
+        return way2;
+        
     }
 }
