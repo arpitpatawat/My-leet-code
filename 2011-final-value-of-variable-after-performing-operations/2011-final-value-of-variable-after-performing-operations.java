@@ -3,17 +3,12 @@ class Solution {
     public int finalValueAfterOperations(String[] o) {
         int ans = 0;
         for (String x : o) {
-            switch (x) {
-                case "++X":
+            char p = x.charAt(1);
+            switch (p) {
+                case '+':
                     ans++;
                     break;
-                case "X++":
-                    ans++;
-                    break;
-                case "--X":
-                    ans--;
-                    break;
-                case "X--":
+                case '-':
                     ans--;
                     break;
             }
