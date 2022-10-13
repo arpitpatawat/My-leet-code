@@ -1,42 +1,26 @@
 class Solution {
-    public int largestRectangleArea(int[] arr) {
+    public int largestRectangleArea(int[] heights) {
         Stack<Integer> st = new Stack<>();
-        int[] nse = new int[arr.length];
-        for(int i = nse.length - 1; i >= 0 ; --i){
-            while(st.size() > 0 && arr[st.peek()] >= arr[i]){
-                st.pop();
-            }
-            if(st.isEmpty()){
-                nse[i] = arr.length;
-            }
-            else{
-               nse[i] = st.peek();
+        
+        int ans = 0, i = 0;
+        for(i = 0 ; i < heights.length ; ++i){
+            while(st.size() > 0 && heights[st.peek()] > heights[i]){
+                // operation
+                int index = st.pop();
+                int width = (st.size() > 0) ? i - st.peek() - 1 : i; 
+                int area = heights[index] * width;
+                ans = Math.max(ans, area);
             }
             st.push(i);
         }
-        
-        st = new Stack<>();
-        int pse[] = new int[arr.length];
-        for(int i = 0 ; i < pse.length ; ++i){
-            while(st.size() > 0 && arr[st.peek()] >= arr[i]){
-                st.pop();
+        while(st.size() > 0 ){
+                // operation
+                int index = st.pop();
+                int width = (st.size() > 0) ? i - st.peek() - 1 : i; 
+                int area = heights[index] * width;
+                ans = Math.max(ans, area);
             }
-             if(st.isEmpty()){
-                pse[i] = -1;
-            }
-            else{
-               pse[i] = st.peek();
-            }
-            st.push(i);
-        }
-        int res = 0;
         
-        for(int i = 0 ; i < arr.length ; ++i){
-            int width = nse[i] - pse[i] - 1;
-            int area = width * arr[i];
-            res = Math.max(res, area);
-        }
-        
-        return res;
+        return ans;
     }
 }
