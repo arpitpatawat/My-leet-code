@@ -45,15 +45,15 @@ class Solution {
     }
     
     public void DFS(int node, ArrayList<ArrayList<Integer>> adj , ArrayList<Integer> ans, boolean visited []){
-        if(visited[node]){
-            return ;
-        }
+        
         
         visited[node] = true;
         ans.add(node);
         
         for(int i : adj.get(node)){
+            if(!visited[i]){
             DFS(i , adj, ans, visited);
+            }
         }
         
     }
