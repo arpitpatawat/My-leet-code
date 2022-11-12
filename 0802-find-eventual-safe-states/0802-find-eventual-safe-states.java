@@ -1,45 +1,43 @@
 class Solution {
-    public boolean dfs(int node, boolean[] path, boolean[] vis,  Set<Integer> set, int[][] graph ){
-        if(set.contains(node)){
-            return true;
-        }
-        else if(vis[node]){
-            if(path[node]){
-                return false;
-            }
-            else{
-                return true;
-            }
-        }
-        
-        // base case ended
-        vis[node] = true;
-        path[node] = true;
-        for(int i : graph[node]){
-            if(!dfs(i, path, vis, set, graph)){
-                return false;
-            }
-        }
-        set.add(node);
-        path[node] = false;
-        return true;
-        
-    }
     public List<Integer> eventualSafeNodes(int[][] graph) {
-        boolean path[] = new boolean[graph.length];
-        boolean visited[] = new boolean[graph.length];
-        Set<Integer> set = new TreeSet<>();
-        
+        // changes the nodes
+        //if a -> (b,c) then in b->a and c-> a
+        ArrayList<ArrayList<Integer>> adjrev = new ArrayList<>();
         for(int i = 0 ; i < graph.length; ++i){
-            if(!visited[i]){
-                dfs(i, path, visited, set, graph);
+            adjrev.add(new ArrayList<Integer>());
+        }
+        int indeg[] = new int[graph.length];
+        for(int i = 0 ; i < graph.length; ++i){
+            for(int j : graph[i]){
+                // i -> j then we want j -> i
+                adjrev.get(j).add(i);
+                // also indegee of i++ as j -> i
+                indeg[i]++;
             }
         }
-        
-        Iterator<Integer> it = set.iterator();
-        List<Integer> ans = new ArrayList<>();
-        while(it.hasNext()){
-            ans.add(it.next());
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0 ; i < indeg.length; ++i){
+            if(indeg[i] == 0){
+                q.offer(i);
+            }
+        }
+        int temp[] = new int[graph.length];
+        while(!q.isEmpty()){
+            int element = q.poll();
+            ++temp[element];
+            
+            for(int i : adjrev.get(element)){
+                --indeg[i];
+                if(indeg[i] == 0){
+                    q.offer(i);
+                }
+            }
+        }
+        ArrayList<Integer> ans = new ArrayList<>();
+        for(int i = 0 ; i < temp.length; ++i){
+            if(temp[i] == 1){
+                ans.add(i);
+            }
         }
         return ans;
     }
