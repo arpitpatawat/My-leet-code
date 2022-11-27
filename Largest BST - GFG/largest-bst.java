@@ -115,14 +115,18 @@ class GFG
 class Info{
     int min;
     int max;
-    boolean valid;
     int size;
     
-    Info(int min, int max, boolean valid , int size){
+    Info(int min, int max , int size){
         this.min = min;
         this.max = max;
-        this.valid = valid;
         this.size = size;
+    }
+    
+    void printt(){
+        System.out.print(" min" + min);
+        System.out.print(" max" + max);
+        System.out.println(" size" + size);
     }
     
 }
@@ -130,17 +134,20 @@ class Info{
 class Solution{
     static Info helper(Node root){
         if(root == null){
-            return new Info(Integer.MAX_VALUE, Integer.MIN_VALUE, true , 0);
+            return new Info(Integer.MAX_VALUE, Integer.MIN_VALUE , 0);
         }
         
         Info left = helper(root.left);
         Info right = helper(root.right);
-        int curr_min = Math.min(root.data , left.min);
-        int curr_max = Math.max(root.data  , right.max);
-        boolean curr_valid = left.valid && right.valid && left.max < root.data  && right.min > root.data ;
+        boolean curr_valid =  left.max < root.data  && right.min > root.data ;
+        int curr_min = (curr_valid) ? Math.min(root.data , left.min) : Integer.MIN_VALUE;
+        int curr_max =(curr_valid) ? Math.max(root.data  , right.max) : Integer.MAX_VALUE;
         int curr_size = (curr_valid) ? left.size + right.size + 1 : Math.max(left.size , right.size);
         
-        return new Info(curr_min , curr_max ,curr_valid , curr_size);
+        Info curr =  new Info(curr_min , curr_max, curr_size);
+        // System.out.println(root.data);
+        // curr.printt();
+        return curr;
             
     }
     // Return the size of the largest sub-tree which is also a BST
