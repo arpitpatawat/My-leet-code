@@ -126,43 +126,28 @@ class Node
 		left = right = null;		
 	}
 } */
-class Info{
-    boolean valid;
-    int height;
-    
-    Info(boolean valid, int height){
-        this.valid = valid;
-        this.height = height;
-    }
-}
+
 class Tree
 {
-    static Info helper(Node root){
+    int helper(Node root){
         if(root == null){
-            return new Info(true, 0);
+            return 0;
+        }
+        int left = helper(root.left);
+        int right = helper(root.right);
+        
+        if(left == -1 || right == -1 || Math.abs(left - right ) > 1){
+            return -1;
         }
         
-        Info left = helper(root.left);
-        Info right = helper(root.right);
-        int lsize = left.height;
-        int rsize = right.height;
-        
-        boolean valid = false;
-        if(!left.valid || !right.valid){
-            valid  = false;
-        }
-        else if(Math.abs(lsize - rsize) <= 1){
-            valid = true;
-        }
-        
-        return new Info(valid , Math.max(lsize, rsize) + 1);
+        return Math.max(left , right ) + 1;
     }
+    
     //Function to check whether a binary tree is balanced or not.
     boolean isBalanced(Node root)
     {
 	// Your code here
-	    Info xd = helper(root);
-	    return xd.valid;
+	        return helper(root) == -1 ? false : true;
     }
 }
 
