@@ -15,32 +15,28 @@
  */
 class Solution {
     int index;
-    public TreeNode helper(int[] preorder, int[] inorder, int is, int ie){
-        
-        if(is > ie){
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        index = 0;
+        return helper(preorder, inorder, 0, inorder.length - 1);
+    }
+    
+    public TreeNode helper(int[] preorder, int[] inorder, int start, int end){
+        if(start > end){
             return null;
         }
-        TreeNode root = new TreeNode(preorder[index++]);
         
-        int pos = 0;
-        for(int i = is; i <= ie; ++i){
-            if(inorder[i] == root.val){
-                pos = i;
+        TreeNode head = new TreeNode(preorder[index]);
+        int in = 0;
+        for(int i = start ; i <= end; ++i){
+            if(inorder[i] == preorder[index]){
+                in = i;
+                index++;
                 break;
             }
         }
         
-        root.left = helper(preorder, inorder , is, pos - 1);
-        root.right = helper(preorder, inorder , pos + 1, ie);
-        
-        return root;
-    }
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        int is = 0;
-        int ie = inorder.length - 1;
-        index = 0;
-        
-        return helper(preorder, inorder,is,ie);
-        // return ;
+        head.left = helper(preorder, inorder , start , in - 1);
+        head.right = helper(preorder, inorder , in+1 , end);
+        return head;
     }
 }
