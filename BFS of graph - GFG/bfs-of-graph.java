@@ -47,13 +47,12 @@ class Solution {
            
            while(!q.isEmpty()){
                Integer node = q.poll();
-               for(int i = 0 ;  i < adj.get(node).size() ; ++i){
-                   if( ! visited[adj.get(node).get(i)]){
-                       visited[adj.get(node).get(i)] = true;
-                       q.offer(adj.get(node).get(i));
+               for(int i : adj.get(node)){
+                   if( !visited[i]){
+                       visited[i] = true;
+                       q.offer(i);
                    }
                }
-               
                ans.add(node);
            }
            
